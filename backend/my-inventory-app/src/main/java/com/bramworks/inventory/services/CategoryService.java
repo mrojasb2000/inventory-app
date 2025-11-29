@@ -8,4 +8,6 @@ public interface CategoryService {
 
     public ResponseEntity<ResponseRest> getAll();
 
+    public ResponseEntity<ResponseRest> getById(Long id);
+
 }
