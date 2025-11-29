@@ -1,0 +1,24 @@
+services:
+  mysql:
+    platform: linux/x86_64
+    image: mysql:latest
+    container_name: db-dev
+    volumes:
+      - db-dev:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password 
+      TZ: "America/Santiago"
+    ports:
+      - 3306:3306
+    networks:
+      webapp:
+        ipv4_address: 26.0.0.2
+volumes:
+  db-dev:
+networks:
+  webapp:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 26.0.0.0/24
