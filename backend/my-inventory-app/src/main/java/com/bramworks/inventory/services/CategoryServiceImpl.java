@@ -29,6 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
     private static final String MESSAGE_CATEGORIES_RETRIEVED = "Categories retrieved successfully";
     private static final String MESSAGE_CATEGORY_UPDATED = "Category updated successfully";
     private static final String MESSAGE_CATEGORY_NOT_FOUND = "Category not found";
+    private static final String ERROR_DELETE_CATEGORY = "Error delete Category";
+    private static final String MESSAGE_CATEGORY_DELETED = "Category deleted successfully";
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -126,6 +128,27 @@ public class CategoryServiceImpl implements CategoryService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<ResponseRest> delete(Long id) {
+        ResponseRest response = new ResponseRest();
+
+        try {
+            categoryRepository.deleteById(id);
+            response.setMetadata(RESULT_OK, "00", MESSAGE_CATEGORY_DELETED);
+                
+            log.info("Category deleted successfully with id: {}", id);
+        } catch (Exception e) {
+            log.error("Error deleting category: {}", e.getMessage());
+            
+            response.setMetadata(ERROR_RESULT, "99", ERROR_DELETE_CATEGORY);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+            
+
     }
 
     
