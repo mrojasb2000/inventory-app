@@ -11,11 +11,11 @@ public class MetadataResponse {
         return metadata;
     }
 
-    public void setMetadata(String type, String code, String date) {
+    public void setMetadata(String type, String code, String data) {
         HashMap<String, String> map = new HashMap<>();
         map.put("type", type);
         map.put("code", code);
-        map.put("date", date);
+        map.put("date", data);
         this.metadata.add(map);
     }
 }
