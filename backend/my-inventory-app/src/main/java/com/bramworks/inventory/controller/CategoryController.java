@@ -12,6 +12,7 @@ import com.bramworks.inventory.services.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -35,5 +36,10 @@ public class CategoryController {
     @PostMapping("/categories")
     public ResponseEntity<ResponseRest> createCategory(@RequestBody Category category) {
         return categoryService.create(category);
+    }
+
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<ResponseRest> updateCategory(@PathVariable Long id, @RequestBody Category category) {
+        return categoryService.update(id, category);
     }
 }
