@@ -13,4 +13,6 @@ public interface CategoryService {
 
     public ResponseEntity<ResponseRest> create(Category category);
 
+    public ResponseEntity<ResponseRest> update(Long id, Category category);
+
 }
