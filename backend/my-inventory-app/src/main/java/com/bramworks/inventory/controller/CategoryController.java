@@ -9,6 +9,7 @@ import com.bramworks.inventory.model.Category;
 import com.bramworks.inventory.responses.ResponseRest;
 import com.bramworks.inventory.services.CategoryService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,10 @@ public class CategoryController {
     @PutMapping("/categories/{id}")
     public ResponseEntity<ResponseRest> updateCategory(@PathVariable Long id, @RequestBody Category category) {
         return categoryService.update(id, category);
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<ResponseRest> deleteCategory(@PathVariable Long id) {
+        return categoryService.delete(id);
     }
 }
